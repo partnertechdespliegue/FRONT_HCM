@@ -1,0 +1,28 @@
+<hr>
+<div [hidden]="empresa.idEmpresa!=null" >
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div [hidden]="empresa.idEmpresa==null" class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Nombre Parametro</th>
+                    <th class="text-center">Valor Parametro</th>
+                    <th class="text-center">Actualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let par of lsParametros">
+                    <td>{{par.descripcion}}</td>
+                    <td>{{par.codigo=="TIPTARD" ? par.valor=="1"? "Cantidad de días":"Rango minutos" : par.codigo=="TIPORANGO"? par.valor=="1"? "Minutos exactos":"Rango completo" :par.valor}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" (click)="actualizarCategoria(par)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

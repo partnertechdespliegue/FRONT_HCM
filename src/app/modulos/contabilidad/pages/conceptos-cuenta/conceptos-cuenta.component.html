@@ -1,0 +1,142 @@
+<hr>
+<div>
+    <div [hidden]="empresa!=null">
+        <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            Seleccione una empresa
+        </div>
+    </div>
+    <div *ngIf="empresa" class="row">
+        <div *ngIf="mostrar" class="col-8" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="crearConcepto()" class="btn btn-sm btn-info" id="nuevoConcepto" style="width: auto; border-radius: 28px;">Nuevo concepto planilla</button>
+            </div>
+        </div>
+        <div *ngIf="!mostrar" class="col-8" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="crearCuenta()" class="btn btn-sm btn-info" id="nuevoCuenta" style="width: auto; border-radius: 28px;">Nueva cuenta contable</button>
+            </div>
+        </div>
+        <div class="col-4" style="padding-bottom: 20px;">
+            <div class="col-4">
+                <button (click)="generarReporteCueCon()" class="btn btn-sm btn-info" id="generarReporte" style="width: auto; border-radius: 28px;">Generar reporte</button>
+            </div>
+        </div>
+    </div>
+    <nav [hidden]="empresa==null">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a (click)="mostrar=true" class="nav-item nav-link active" id="nav-concepto-tab" data-toggle="tab" href="#nav-concepto" role="tab" aria-controls="nav-concepto" aria-selected="true">Concepto planilla</a>
+            <a (click)="mostrar=false" class="nav-item nav-link" id="nav-cuenta-tab" data-toggle="tab" href="#nav-cuenta" role="tab" aria-controls="nav-cuenta" aria-selected="false">Cuentas contable</a>
+        </div>
+    </nav>
+    <div [hidden]="empresa==null" class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 30px; margin-bottom: 20px;">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-concepto" role="tabpanel" aria-labelledby="nav-concepto-tab">
+                <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center" colspan="2">Descripcion</th>
+                                    <th class="text-center">Cuenta haber provision</th>
+                                    <th class="text-center">Cuenta debe provision</th>
+                                    <th class="text-center">Cuenta haber pago</th>
+                                    <th class="text-center">Cuenta debe pago</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let concepto of lsconcepto">
+                                <tr style="font-size: 12px">
+                                    <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                        <a *ngIf="concepto.expanded" (click)="concepto.expanded = false;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-up-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                        <a *ngIf="!concepto.expanded" (click)="concepto.expanded = true;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-down-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">{{concepto.sdescripcion}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.icodigoCuenta:"No asignago"}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" (click)="actualizarConcepto(concepto)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete" (click)="eliminarConcepto(concepto)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="concepto.expanded" style="font-size: 12px">
+                                    <td colspan="8">
+                                        <div class="form-row col-12" style="margin: 0 auto;">
+                                            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                                <thead style="background: #ebeff5;">
+                                                    <tr>
+                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Codigo</th>
+                                                        <th class="text-center">Descripcion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta haber provision</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberProvision!=null?concepto.cuentaHaberProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta debe provision</td>
+                                                        <td class="text-center">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaDebeProvision!=null?concepto.cuentaDebeProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta haber pago</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaHaberPago!=null?concepto.cuentaHaberPago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">Cuenta debe pago</td>
+                                                        <td class="text-center">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.icodigoCuenta:"No asignago"}}</td>
+                                                        <td class="text-center">{{concepto.cuentaDebePago!=null?concepto.cuentaDebePago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-cuenta" role="tabpanel" aria-labelledby="nav-cuenta-tab">
+                <div class="col-12 ">
+                    <div class="table-responsive ">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5; ">
+                                <tr>
+                                    <th class="text-center">Codigo</th>
+                                    <th class="text-center">Descripcion</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let cuenta of lscuenta">
+                                    <td class="text-center">{{cuenta.icodigoCuenta}}</td>
+                                    <td class="text-center">{{cuenta.sdescripcion}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" (click)="actualizarCuenta(cuenta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete" (click)="eliminarCuenta(cuenta)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

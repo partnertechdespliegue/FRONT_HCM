@@ -1,0 +1,123 @@
+<hr>
+<div [hidden]="empresa!=null">
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div [hidden]="empresa==null" class="card-header" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+    <div class="col-12 row" style="margin: 0;">
+        <div class="col-5" style="margin-bottom: 10px">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="SearchOptions" id="numDoc" (click)="checkAction()" (click)="filterPost=''" checked>
+                <label class="form-check-label" for="numDoc" style="font-size: 12px">Buscar por Número Documento</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="SearchOptions" id="nomCmp" (click)="checkAction()" (click)="filterPost=''">
+                <label class="form-check-label" for="nomCmp" style="font-size: 12px">Buscar por Nombre</label>
+            </div>
+            <!-- <br> -->
+            <input class="form-control form-control-sm min" spellcheck="false" id="inputGeneral" type="text" [(ngModel)]="filterPost" placeholder="{{mostrarPH}}" style="width: 90%; border-radius: 28px">
+        </div>
+        <div class="col-4" style="margin: auto;">
+            <label for="nom">Tipo Planilla</label>
+            <ng-select [items]="lsTipoPlanilla" bindLabel="descripcion" bindValue="" [clearable]="false" placeholder="Seleccione un tipo" id="tplan" [(ngModel)]="tipoPlan" name="#tipoPlan" (ngModelChange)="changeTipoPlanilla($event)" style="width: 90%;">
+            </ng-select>
+        </div>
+        <div class="col-3">
+            <button [hidden]="tipoPlan.categoriaPlanilla!=5" [disabled]="lsTrabajadorPlanilla?.length == 0" class="btn btn-sm btn-info" id="genPlanMasiva" (click)="calcularPlanillaMasiva()" style="width: auto; border-radius: 28px; margin-top: 30px; margin-left: 40px;">Generar Planilla Masiva</button>
+
+            <button [hidden]="tipoPlan.categoriaPlanilla!=4" [disabled]="lsTrabajadorHonorario?.length == 0" class="btn btn-sm btn-info" (click)="generarTxtGeneral()" id="gentxt" style="width: auto; border-radius: 28px; margin-top: 30px; margin-left: 40px;">Generar Archivo
+                General</button>
+        </div>
+    </div>
+</div>
+<div [hidden]="empresa==null">
+    <div [hidden]="tipoPlan.categoriaPlanilla==4 || tipoPlan.categoriaPlanilla==5">
+        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            No se ha seleccionado un tipo de planilla
+        </div>
+    </div>
+    <div [hidden]="tipoPlan.categoriaPlanilla!=5" class="col-12">
+        <div *ngIf="lsTrabajadorPlanilla?.length == 0">
+            <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                No hay registros para la planilla seleccionada
+            </div>
+        </div>
+        <div *ngIf="lsTrabajadorPlanilla?.length > 0" class="table-responsive">
+            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                <thead style="background: #ebeff5;">
+                    <tr>
+                        <th class="text-center">Numero Documento</th>
+                        <th class="text-center">Apellidos y Nombre</th>
+                        <th class="text-center">Correo</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Planilla</th>
+                        <th class="text-center">Boleta</th>
+                        <th class="text-center">5ta Categoria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 12px" *ngFor="let trab of lsTrabajadorPlanilla | filter :filterPost :filterBoolean">
+                        <td class="text-center">{{trab.trabajador.nroDoc}}</td>
+                        <td>{{trab.trabajador.apePater}} {{trab.trabajador.apeMater}} {{trab.trabajador.nombres}}</td>
+                        <td>{{trab.trabajador.correo}}</td>
+                        <td class="text-center">{{trab.trabajador.situacion.descripcion}}</td>
+                        <td class="text-center">
+                            <i class="mdi mdi-calculator" (click)="calcularPlanilla(trab)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                        <td class="text-center">
+                            <i class="mdi mdi-library-books" (click)="mostrarBoletas(trab)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                        <td class="text-center">
+                            <i class="mdi mdi-numeric-5-box-multiple-outline" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div [hidden]="tipoPlan.categoriaPlanilla!=4" class="col-12">
+        <div *ngIf="lsTrabajadorHonorario?.length == 0">
+            <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                No hay registros para la planilla seleccionada
+            </div>
+        </div>
+        <div *ngIf="lsTrabajadorHonorario?.length > 0" class="table-responsive">
+            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                <thead style="background: #ebeff5;">
+                    <tr>
+                        <th class="text-center">Numero Documento</th>
+                        <th class="text-center">Apellidos y Nombre</th>
+                        <th class="text-center">Correo</th>
+                        <th class="text-center">Estado</th>
+                        <th class="text-center">Generar Archivo Personal</th>
+                        <th class="text-center">Suspencion</th>
+                        <th class="text-center">RHE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="font-size: 12px" *ngFor="let trab of lsTrabajadorHonorario | filter :filterPost :filterBoolean">
+                        <td class="text-center">{{trab.trabajador.nroDoc}}</td>
+                        <td>{{trab.trabajador.apePater}} {{trab.trabajador.apeMater}} {{trab.trabajador.nombres}}</td>
+                        <td>{{trab.trabajador.correo}}</td>
+                        <td class="text-center">{{trab.trabajador.situacion.descripcion}}</td>
+                        <td class="text-center">
+                            <i class="mdi mdi-cloud-download" (click)="generarTxtPersonal(trab)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                        <td class="text-center" *ngIf="trab.sueldoBase>=1500">
+                            <i class="mdi mdi-cloud-upload" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            <input type="file" (change)="subirArchivo($event,trab.trabajador)" accept="application/pdf" class="form-control form-control-sm" style="width:7%; position:absolute; height:30px; left:0px; opacity:0; transform: translateX(880px)">
+                        </td>
+                        <td class="text-center" *ngIf="1500>trab.sueldoBase">
+                            <i class="mdi mdi-cloud-outline-off" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                        <td class="text-center">
+                            <i class="mdi mdi-eye" (click)="abrirRHE(trab.trabajador)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

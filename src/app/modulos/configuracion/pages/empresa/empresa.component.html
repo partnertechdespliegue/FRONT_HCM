@@ -1,0 +1,47 @@
+<hr>
+<div class="col-12 row" style="margin: 0;">
+    <div class="form-group col-6 mb-3">
+        <button class="btn btn-sm btn-info" (click)="nuevoEmpresa()" style="width: 23%; border-radius: 28px;">Nueva Empresa</button>
+    </div>
+</div>
+<div [hidden]="lsEmpresas?.length > 0" >
+    <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        No hay ninguna empresa registrada
+    </div>
+</div>
+<div [hidden]="lsEmpresas?.length == 0" class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">RUC</th>
+                    <th class="text-center">Razon Social</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Gestion<br>Encargado Planilla</th>
+                    <th class="text-center">Gestion<br>Cuenta Cargo</th>
+                    <th class="text-center">Actualizar</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let emp of lsEmpresas">
+                    <td>{{emp.ruc}}</td>
+                    <td>{{emp.razonSocial}}</td>
+                    <td>{{emp.estado==1?"Activo":"Inactivo"}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-account" aria-hidden="true" (click)="listarEncargadoPlan(emp)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-clipboard-outline" aria-hidden="true" (click)="listarCuentaCargo(emp)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" aria-hidden="true" (click)="actualizarEmpresa(emp)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-delete" aria-hidden="true" (click)="eliminarEmpresa(emp)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

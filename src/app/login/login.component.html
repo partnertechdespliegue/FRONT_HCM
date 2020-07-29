@@ -1,0 +1,27 @@
+<section id="wrapper" class="login-register login-sidebar" style="background-image:url(assets/images/background/489536-PH1MCV-393.jpg);">
+    <div class="login-box card">
+        <div class="card-body opacar">
+            <form ngNativeValidate #f="ngForm" class="form-horizontal form-material">
+                <a href="javascript:void(0)" class="text-center db" style="text-decoration: none; cursor: auto;">
+                    <h1>PLANILLAS</h1>
+                </a>
+                <div class="form-group m-t-40">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="usuario.username" name="#username" class="form-control" type="text" required placeholder="Username">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input [(ngModel)]="usuario.password" name="#password" class="form-control" type="password" required placeholder="Contraseña">
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button [disabled]="loadRegister" id="entrar" (click)="login()" class="btn btn-info btn-lg btn-block text-uppercase " type="submit">
+                            <span [hidden]="!loadRegister" ><i class="fa fa-spin fa-spinner"></i></span>Ingresar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

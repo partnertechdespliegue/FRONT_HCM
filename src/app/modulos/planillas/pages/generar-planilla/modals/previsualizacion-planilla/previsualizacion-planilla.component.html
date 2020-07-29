@@ -1,0 +1,351 @@
+<div class="modal-header" style="padding-bottom: 0px;">
+    <div class="container">
+        <div class="col-12" style="padding: 0px; margin:10px 0px; text-align: center;">
+            <label style="font-size: 20px; font-weight: bold;"> BOLETA DE PAGO </label>
+        </div>
+        <div class="col-12 row" style="padding: 0px; margin-left: 0px;">
+            <div class="col-8" style="padding: 0px;">
+                <div class="col-12" style="padding: 0px;">
+                    <label style="word-spacing: 25px; font-weight: bold;"> RUC : {{planilla_historica.contrato.trabajador.empresa.ruc}} <span style="word-spacing: 3px;"> {{planilla_historica.contrato.trabajador.empresa.razonSocial}} </span></label>
+                </div>
+                <div class="col-12" style="padding: 0px;">
+                    <label style=" font-weight: bold;"> JR. ELOY REATEGUI 626 SMP </label>
+                </div>
+            </div>
+            <div class="col-4" style="padding: 0px;">
+                <div class="col-12" style="padding: 0px;">
+                    <img src="">
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="padding: 0px; margin-left: 0px;">
+            <div class="col-8" style="padding: 0px;">
+                <label style=" font-weight: bold;">GERENCIA GENERAL</label>
+            </div>
+            <div class="col-4 row" style="padding: 0px;">
+                <div class="col-7" style="word-spacing: 7px;">
+                    <label style=" font-weight: bold;">MES : <span>
+                        <label>{{planilla_historica.pdoMes.descripcion}}</label>
+                    </span>
+                    </label>
+                </div>
+                <div class="col-5" style="word-spacing: 1px;">
+                    <label style=" font-weight: bold;">AÑO : <span>
+                        <label>{{planilla_historica.pdoAno.descripcion}}</label>
+                    </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-body">
+    <div class="container">
+        <div class="col-12 row" style="margin-left: 0px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Codigo Trabajador <span style="padding-left: 68px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;"> ------- </label>
+            </div>
+            <div class="col-7" style="padding: 0px;">
+                <label>Apellidos y Nombres <span style="word-spacing: 10px; padding-left: 14px;"> : </span> {{planilla_historica.contrato.trabajador.nombres}} {{planilla_historica.contrato.trabajador.apePater}} {{planilla_historica.contrato.trabajador.apeMater}}</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="border-bottom: 1px solid #e9ecef; margin-left: 0px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>DNI Nro. <span style="padding-left: 117px;"> : </span> </label>
+                <label style="float: right; padding-right: 45px;"> {{planilla_historica.contrato.trabajador.nroDoc}} </label>
+            </div>
+            <div class="col-7" style="padding: 0px;">
+                <label>Periodo Laboral <span style="word-spacing: 10px; padding-left: 39px;"> : </span> --------- </label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 15px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Fecha inicio de la relación laboral <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;"> {{planilla_historica.contrato.fecInicio | date:'dd-MM-yyyy'}} </label>
+            </div>
+            <div class="col-7 row" style="padding: 0px;">
+                <div class="col-6" style="padding: 0px;">
+                    <label>Sueldo Basico</label>
+                    <label style="float: right; padding-right: 15px;">{{planilla_historica.contrato.sueldoBase}}</label>
+                </div>
+                <div class="col-6" style="padding: 0px;">
+                    <label>Nro. CUSPP <span style="word-spacing: 10px; padding-left: 10px;"> : </span></label>
+                    <label style="float: right"> {{planilla_historica.contrato.trabajador.nroCuspp}} </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Número de días efectivamente <span style="padding-left: 17px;"> : </span> </label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.diaCompbl}}</label>
+            </div>
+            <div class="col-7 row" style="padding: 0px;">
+                <div class="col-6" style="padding: 0px;">
+                    <label>Tardanzas {{labelTardanza}}</label>
+                    <label style="float: right; padding-right: 15px;">{{planilla_historica.tiempo_tardanza}}</label>
+                </div>
+                <div class="col-6" style="padding: 0px;">
+                    <label>Nro. de horas en sobretiempo (25%) </label>
+                    <label style="float: right;"> {{planilla_historica.hoExt25}} </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Dias Feriados <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.diaFerdo}}</label>
+            </div>
+            <div class="col-7 row" style="padding: 0px;">
+                <div class="col-6" style="padding: 0px;">
+                    <label>Tipo Tardanza</label>
+                    <label style="float: right; padding-right: 15px;" *ngIf="labelTipoTardanza"> {{labelTipoTardanza}} </label>
+                </div>
+                <div class="col-6" style="padding: 0px;">
+                    <label>Nro. de horas en sobretiempo (35%) </label>
+                    <label style="float: right;"> {{planilla_historica.hoExt35}} </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Número de días feriados laborados <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.diaFerdoLabo}}</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Días no laborados y no subsidiados <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.faltaInjusti}}</label>
+            </div>
+            <div class="col-7 row" style="padding: 0px;">
+
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Días no laborados y subsidiados <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.faltaJusti}}</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label> Días de vacaciones <span style="padding-left: 17px;"> : </span></label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.diaVaca}}</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;" *ngIf="planilla_historica.afp!=null">
+                <label>Regimen Pensionario: </label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.afp.descripcion}}</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Comis.: </label>
+                <label style="float: right; padding-right: 45px;">Flujo</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-5" style="padding: 0px;">
+                <label>Ocupación :</label>
+                <!-- <label style="float: right; padding-right: 45px;">{{planilla_historica.contrato.cargo.descripcion}}</label> -->
+            </div>
+        </div>
+        <div class="col-12 row" style="border-bottom: 1px solid #e9ecef; margin-left: 0px; margin-top: 5px; padding: 0px; padding-bottom: 15px;" *ngIf="planilla_historica.contrato.bancoSueldo!=null">
+            <div class="col-5" style="padding: 0px;">
+                <label>Banco</label>
+                <label style="float: right; padding-right: 45px;">{{planilla_historica.contrato.bancoSueldo.descripcion}}</label>
+            </div>
+            <div class="col-7 row" style="padding: 0px;">
+                <div class="col-6" style="padding: 0px;">
+                    <label>Nro. Cuenta :</label>
+                    <label style="float: right; padding-right: 15px;">{{planilla_historica.contrato.nroCta}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="border-bottom: 1px solid #e9ecef; margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-4" style="padding: 0px;text-align: center;">
+                <label>INGRESOS</label>
+            </div>
+            <div class="col-4" style="padding: 0px;text-align: center;">
+                <label>DESCUENTOS</label>
+            </div>
+            <div class="col-4" style="padding: 0px;text-align: center;">
+                <label>APORTES</label>
+            </div>
+        </div>
+        <div class="col-12 row" style="border-bottom: 1px solid #e9ecef; margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-4" style="padding: 0px;height: 220px;border-right: 1px solid #e9ecef;">
+                <div class="col-12">
+                    <label>SUELDO MENSUAL</label>
+                    <label style="float: right;">{{planilla_historica.remJorNorm}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remHoExt25!=0">
+                    <label>HORAS EXTRA 25%</label>
+                    <label style="float: right;">{{planilla_historica.remHoExt25}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remHoExt35!=0">
+                    <label>HORAS EXTRA 35%</label>
+                    <label style="float: right;">{{planilla_historica.remHoExt35}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.asigFam!=0">
+                    <label>ASIGNACIÓN FAMILIAR</label>
+                    <label style="float: right;">{{planilla_historica.asigFam}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remDiaFerdoLabo!=0">
+                    <label>FERIADOS LABORADOS</label>
+                    <label style="float: right;">{{planilla_historica.remDiaFerdoLabo}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remVacaVend!=0">
+                    <label>VENTA VACACIONES</label>
+                    <label style="float: right;">{{planilla_historica.remVacaVend}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remDiaVaca!=0">
+                    <label>DIAS VACACIONES</label>
+                    <label style="float: right;">{{planilla_historica.remDiaVaca}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remGrati!=0">
+                    <label>GRATIFICACION</label>
+                    <label style="float: right;">{{planilla_historica.remGrati}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.bonif29351!=0">
+                    <label>BONFI. LEY 29351</label>
+                    <label style="float: right;">{{planilla_historica.bonif29351}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.cts!=0">
+                    <label>CTS</label>
+                    <label style="float: right;">{{planilla_historica.cts}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.movilidad!=0">
+                    <label>MOVILIDAD</label>
+                    <label style="float: right;">{{planilla_historica.movilidad}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.remComisiones!=0">
+                    <label>COMISIONES</label>
+                    <label style="float: right;">{{planilla_historica.remComisiones}}</label>
+                </div>
+                <div *ngIf="lsphRemu?.length > 0">
+                    <div class="col-12" *ngFor="let phRemu of lsphRemu">
+                        <label>{{phRemu.remuneraciones.descripcion}}</label>
+                        <label style="float: right;">{{phRemu.dmonto}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="padding: 0px;height: 140px;border-right: 1px solid #e9ecef;">
+                <div class="col-12" *ngIf="planilla_historica.dsctFondObl!=0">
+                    <label>AFP Fondo Obligatorio</label>
+                    <label style="float: right;">{{planilla_historica.dsctFondObl}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctPriSeg!=0">
+                    <label>AFP Prima Seguro</label>
+                    <label style="float: right;">{{planilla_historica.dsctPriSeg}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctComSobFLu!=0">
+                    <label>AFP Comision Sob. Flujo</label>
+                    <label style="float: right;">{{planilla_historica.dsctComSobFLu}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctComMixSobFlu!=0">
+                    <label>AFP Comision Mix. Sob. Flujo</label>
+                    <label style="float: right;">{{planilla_historica.dsctComMixSobFlu}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctComMixAnualSal!=0">
+                    <label>AFP Comision Mix. Sob. Saldo</label>
+                    <label style="float: right;">{{planilla_historica.dsctComMixAnualSal}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctOnp!=0">
+                    <label>ONP</label>
+                    <label style="float: right;">{{planilla_historica.dsctOnp}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctTardanza != 0">
+                    <label>TARDANZA</label>
+                    <label style="float: right;">{{planilla_historica.dsctTardanza}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsctFaltaInjusti!=0">
+                    <label>FALTAS INJUSTIFICADAS</label>
+                    <label style="float: right;">{{planilla_historica.dsctFaltaInjusti}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.dsct5taCat!=0">
+                    <label>RENTA QUINTA CATEGORIA</label>
+                    <label style="float: right;">{{planilla_historica.dsct5taCat}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.essaludVida!=0">
+                    <label>ESSALUD + VIDA</label>
+                    <label style="float: right;">{{planilla_historica.essaludVida}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.monFalt!=0">
+                    <label>FALTANTES</label>
+                    <label style="float: right;">{{planilla_historica.monFalt}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.monAdela!=0">
+                    <label>ADELANTOS</label>
+                    <label style="float: right;">{{planilla_historica.monAdela}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.monPrest!=0">
+                    <label>PRESTAMOS</label>
+                    <label style="float: right;">{{planilla_historica.monPrest}}</label>
+                </div>
+                <div *ngIf="lsphDsct?.length > 0">
+                    <div class="col-12" *ngFor="let phDsct of lsphDsct">
+                        <label>{{phDsct.descuentos.descripcion}}</label>
+                        <label style="float: right;">{{phDsct.dmonto}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4" style="padding: 0px;height: 140px;">
+                <div class="col-12" *ngIf="planilla_historica.aporEssalud!=0">
+                    <label>APORTE ESSALUD</label>
+                    <label style="float: right;">{{planilla_historica.aporEssalud}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.eps!=0">
+                    <label>APORTE EPS</label>
+                    <label style="float: right;">{{planilla_historica.eps}}</label>
+                </div>
+                <div class="col-12" *ngIf="planilla_historica.sctr!=0">
+                    <label>SCTR</label>
+                    <label style="float: right;">{{planilla_historica.sctr}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="border-bottom: 1px solid #e9ecef; margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-4" style="padding: 0px;border-right: 1px solid #e9ecef;">
+                <div class="col-12">
+                    <label>Total Ingresos <span style="padding-left: 50px;">S/.</span> </label>
+                    <label style="float: right;">{{planilla_historica.totIngre}}</label>
+                </div>
+            </div>
+            <div class="col-4" style="padding: 0px;border-right: 1px solid #e9ecef;">
+                <div class="col-12">
+                    <label>Total Descuentos <span style="padding-left: 50px;">S/.</span> </label>
+                    <label style="float: right;">{{planilla_historica.totDsct}}</label>
+                </div>
+            </div>
+            <div class="col-4" style="padding: 0px;">
+                <div class="col-12">
+                    <label>Total Aportes <span style="padding-left: 50px;">S/.</span> </label>
+                    <label style="float: right;">{{planilla_historica.totApor}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 row" style="margin-left: 0px; margin-top: 5px; padding: 0px;">
+            <div class="col-4" style="padding: 0px;border-right: 1px solid #e9ecef;border-bottom: 1px solid #e9ecef;">
+                <div class="col-12">
+                    <label>Neto a Pagar <span style="padding-left: 50px;">S/.</span> </label>
+                    <label style="float: right;">{{planilla_historica.totPagado}}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!---
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Descargando reporte . . .</p>
+        </div>
+    </div>
+</div>
+-->
+    <div class=" modal-footer ">
+        <button (click)="close()" type="button" class="btn btn-success btn-sm min" style="margin: 0px 5px;">OK</button>
+        <button (click)="print()" t ype="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Descargar</button>
+    </div>

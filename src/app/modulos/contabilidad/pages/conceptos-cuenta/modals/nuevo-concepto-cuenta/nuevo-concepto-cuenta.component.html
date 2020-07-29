@@ -1,0 +1,70 @@
+<div *ngIf="mostrar">
+    <form #nuevoConcepto="ngForm" ngNativeValidate>
+        <div class="modal-header">
+            <h5 class="modal-title">{{accion=="RCO"?"Registrar":"Actualizar"}} concepto planilla</h5>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="descon">Descripcion</label>
+                        <input class="form-control form-control-sm" type="text" id="descon" name="#conceptoPlanilla.sdescripcion" [(ngModel)]="conceptoPlanilla.sdescripcion" maxlength="25" required>
+                    </div>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="cuehabprov">Cuenta haber provision</label>
+                        <ng-select [items]="lscuenta" bindLabel="codigoDescripcion" bindValue="iidCuentaContable" placeholder="Seleccione ..." id="cuehabprov" name="#idHaberProvision" [(ngModel)]="idHaberProvision" style="width: 100%; margin-right: 10px;"></ng-select>
+                    </div>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="cuedebprov">Cuenta debe provision</label>
+                        <ng-select [items]="lscuenta" bindLabel="codigoDescripcion" bindValue="iidCuentaContable" placeholder="Seleccione ..." id="cuedebprov" name="#idDebeProvision" [(ngModel)]="idDebeProvision" style="width: 100%; margin-right: 10px;"></ng-select>
+                    </div>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="cuehabpag">Cuenta haber pago</label>
+                        <ng-select [items]="lscuenta" bindLabel="codigoDescripcion" bindValue="iidCuentaContable" placeholder="Seleccione ..." id="cuehabpag" name="#idHaberPago" [(ngModel)]="idHaberPago" style="width: 100%; margin-right: 10px;"></ng-select>
+                    </div>
+                </div>
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="cuedebpag">Cuenta debe pago</label>
+                        <ng-select [items]="lscuenta" bindLabel="codigoDescripcion" bindValue="iidCuentaContable" placeholder="Seleccione ..." id="cuedebpag" name="#idDebePago" [(ngModel)]="idDebePago" style="width: 100%; margin-right: 10px;"></ng-select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" modal-footer ">
+            <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+            <button (click)="escogerCO()" type="button" [disabled]="nuevoConcepto.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">{{accion=="RCO"?"Registrar":"Actualizar"}}</button>
+        </div>
+    </form>
+</div>
+<div *ngIf="!mostrar">
+    <form #nuevoCuenta="ngForm" ngNativeValidate>
+        <div class="modal-header">
+            <h5 class="modal-title">{{accion=="RCU"?"Registrar":"Actualizar"}} cuenta contable</h5>
+        </div>
+        <div class="modal-body">
+            <div class="row">
+                <div class="form-row col-12">
+                    <div class="col-12 mb-3">
+                        <label for="codcu">Codigo</label>
+                        <input class="form-control form-control-sm" type="text" id="codcu" name="#cuentaContable.codigo" [(ngModel)]="cuentaContable.icodigoCuenta" maxlength="9" (keypress)="verificarNumero($event)" required>
+                    </div>
+                    <div class="col-12 mb-3">
+                        <label for="descu">Descripcion</label>
+                        <textarea class="form-control form-control-sm textarea" type="text" id="descu" name="#cuentaContable.descripcion" [(ngModel)]="cuentaContable.sdescripcion" required></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" modal-footer ">
+            <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+            <button (click)="escogerCU()" type="button" [disabled]="nuevoCuenta.form.invalid" class="btn btn-info btn-sm min" style="margin: 0px 5px;">{{accion=="RCU"?"Registrar":"Actualizar"}}</button>
+        </div>
+    </form>
+</div>

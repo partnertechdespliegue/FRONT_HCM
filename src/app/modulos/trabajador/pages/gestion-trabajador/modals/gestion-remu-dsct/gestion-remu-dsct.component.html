@@ -1,0 +1,160 @@
+<nav class="mt-lg-1">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-gst-remu" data-toggle="tab" href="#nav-remu" role="tab" aria-controls="nav-remu" aria-selected="true">Remuneraciones</a>
+        <a class="nav-item nav-link" id="nav-gst-dsct" data-toggle="tab" href="#nav-dsct" role="tab" aria-controls="nav-dsct" aria-selected="false">Descuentos</a>
+        <a class="nav-item nav-link" id="nav-gst-inac" data-toggle="tab" href="#nav-inac" role="tab" aria-controls="nav-inac" aria-selected="false">Inactivos</a>
+    </div>
+</nav>
+<div class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px 30px; margin: 10px 5px;">
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-remu" role="tabpanel" aria-labelledby="nav-remu">
+            <div class="col-12">
+                <div class="form-group col-4 mb-2">
+                    <button class="btn btn-sm btn-info" (click)="nuevoTrabRemu()" style="width: auto; border-radius: 28px;">Agregar Remuneracion
+                    </button>
+                </div>
+                <div *ngIf="lsTrabRemu?.length == 0" >
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con remuneraciones asociadas
+                    </div>
+                </div>
+                <div *ngIf="lsTrabRemu?.length > 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Afecto Descuento</th>
+                                <th class="text-center">Dar de Baja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: 12px" *ngFor="let trabRemu of lsTrabRemu">
+                                <td>{{trabRemu.remuneraciones.descripcion}}</td>
+                                <td>{{trabRemu.remuneraciones.tipoRemuneracion==1?'MONTO FIJO':'FORMULA'}}</td>
+                                <td *ngIf="trabRemu.remuneraciones.tipoRemuneracion==1">monto fijo</td>
+                                <td *ngIf="trabRemu.remuneraciones.tipoRemuneracion==2"> formualo</td>
+                                <td>{{trabRemu.remuneraciones.afectoDsct==0?'NO':'SI'}}</td>
+                                <td class="text-center">
+                                    <i class="mdi mdi-window-close" (click)="darBajaRemu(trabRemu)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-dsct" role="tabpanel" aria-labelledby="nav-dsct">
+            <div class="col-12">
+                <div class="form-group col-4 mb-2">
+                    <button class="btn btn-sm btn-info" (click)="nuevoTrabDsct()" style="width: auto; border-radius: 28px;">Agregar Descuento
+                    </button>
+                </div>
+                <div *ngIf="lsTrabDsct?.length == 0" >
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con descuentos asociados
+                    </div>
+                </div>
+                <div *ngIf="lsTrabDsct?.length > 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Dar de Baja</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: 12px" *ngFor="let trabDsct of lsTrabDsct">
+                                <td>{{trabDsct.descuentos.descripcion}}</td>
+                                <td>{{trabDsct.descuentos.tipoDsct==1?'MONTO FIJO':'FORMULA'}}</td>
+                                <td *ngIf="trabDsct.descuentos.tipoDsct==1">montofijo</td>
+                                <td *ngIf="trabDsct.descuentos.tipoDsct==2">formula</td>
+                                <td class="text-center">
+                                    <i class="mdi mdi-window-close" (click)="darBajaDsct(trabDsct)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-inac" role="tabpanel" aria-labelledby="nav-inac">
+            <div class="col-12">
+                <div class="form-group col-8 mb-2" style="margin-top: 5px;">
+                    <h5 class="modal-title">Remuneraciones: </h5>
+                </div>
+                <div *ngIf="lsTrabRemuInac?.length == 0" >
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con remuneraciones inactivas
+                    </div>
+                </div>
+                <div *ngIf="lsTrabRemuInac?.length > 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Afecto Descuento</th>
+                                <th class="text-center">Activar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: 12px" *ngFor="let trabRemuInac of lsTrabRemuInac">
+                                <td>{{trabRemuInac.remuneraciones.descripcion}}</td>
+                                <td>{{trabRemuInac.remuneraciones.tipoRemuneracion==1?'MONTO FIJO':'FORMULA'}}</td>
+                                <td *ngIf="trabRemuInac.remuneraciones.tipoRemuneracion==1">monto fijo</td>
+                                <td *ngIf="trabRemuInac.remuneraciones.tipoRemuneracion==2"> formualo</td>
+                                <td>{{trabRemuInac.remuneraciones.afectoDsct==0?'NO':'SI'}}</td>
+                                <td class="text-center">
+                                    <i class="mdi mdi-replay" (click)="activarRemu(trabRemuInac)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr>
+            <div class="col-12">
+                <div class="form-group col-8 mb-2" style="margin-top: 5px;">
+                    <h5 class="modal-title">Descuentos: </h5>
+                </div>
+                <div *ngIf="lsTrabDsctInac?.length == 0" >
+                    <div style="text-align: center; font-size: 18px; margin: 0px 10px ;padding:10px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                        No cuenta con descuentos inactivos
+                    </div>
+                </div>
+                <div *ngIf="lsTrabDsctInac?.length > 0" class="table-responsive">
+                    <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                        <thead style="background: #ebeff5;">
+                            <tr>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">Tipo</th>
+                                <th class="text-center">Descripcion</th>
+                                <th class="text-center">Activar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" style="font-size: 12px" *ngFor="let trabDsctInac of lsTrabDsctInac">
+                                <td>{{trabDsctInac.descuentos.descripcion}}</td>
+                                <td>{{trabDsctInac.descuentos.tipoDsct==1?'MONTO FIJO':'FORMULA'}}</td>
+                                <td *ngIf="trabDsctInac.descuentos.tipoDsct==1">montofijo</td>
+                                <td *ngIf="trabDsctInac.descuentos.tipoDsct==2">formula</td>
+                                <td class="text-center">
+                                    <i class="mdi mdi-replay" (click)="activarDsct(trabDsctInac)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class=" modal-footer ">
+    <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cancelar</button>
+</div>

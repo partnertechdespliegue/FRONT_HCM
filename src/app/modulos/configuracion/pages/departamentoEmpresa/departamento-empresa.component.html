@@ -1,0 +1,42 @@
+<hr>
+<div [hidden]="empresa!=null">
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div class="col-12 row" style="margin: 0;" *ngIf="empresa">
+    <div class="form-group col-6 mb-3">
+        <button class="btn btn-sm btn-info" (click)="crearDepartamentoEmpresa()" style="width: auto; border-radius: 28px;">Nuevo Departamento</button>
+    </div>
+</div>
+<div [hidden]="empresa==null" class="col-12">
+    <div [hidden]="listDepEmp?.length > 0">
+        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            No hay ningun Departamento Empresa registrada
+        </div>
+    </div>
+    <div [hidden]="listDepEmp?.length == 0" class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Gerente</th>
+                    <th class="text-center">Actualizar</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let depEmpr of listDepEmp">
+                    <td>{{depEmpr.snombre}}</td>
+                    <td>{{depEmpr.gerente==null?"No asignado":depEmpr.gerente.nombres}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" aria-hidden="true" (click)="actualizarDepartamentoEmpresa(depEmpr)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-delete" aria-hidden="true" (click)=eliminarDepartamentoEmpresa(depEmpr) style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

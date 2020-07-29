@@ -1,0 +1,49 @@
+<hr>
+<div [hidden]="empresa != null" >
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div class="col-12" style="padding-bottom: 20px;" *ngIf="empresa">
+    <div class="col-4">
+        <button class="btn btn-sm btn-info" (click)="nuevoHorario()" id="nuevo" style="width: 35%; border-radius: 28px;">Nuevo Horario</button>
+    </div>
+</div>
+
+<div [hidden]="empresa == null" class="col-12">
+    <div [hidden]="lsHorarios?.length > 0" >
+        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            No hay ningun horario registrado
+        </div>
+    </div>
+    <div [hidden]="lsHorarios?.length == 0" class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Descripcion</th>
+                    <th class="text-center">Hora Inicio laboral</th>
+                    <th class="text-center">Hora Fin laboral</th>
+                    <th class="text-center">Hora Inicio Break</th>
+                    <th class="text-center">Hora Fin Break</th>
+                    <th class="text-center">Dias</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Editar</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let horario of lsHorarios">
+                <tr style="font-size: 12px">
+                    <td class="text-center">{{horario.descripcion}}</td>
+                    <td class="text-center">{{horario.horIniDia | date:'h:mm a'}} </td>
+                    <td class="text-center">{{horario.horFinDia | date:'h:mm a'}}</td>
+                    <td class="text-center">{{horario.horAlmuerIni | date:'h:mm a'}}</td>
+                    <td class="text-center">{{horario.horAlmuerFin | date:'h:mm a'}}</td>
+                    <td class="text-center">{{horario.totalDias}}</td>
+                    <td class="text-center">{{horario.estado?'ACTIVO':'INACTIVO'}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" id="acthor" (click)="actualizarHorario(horario)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

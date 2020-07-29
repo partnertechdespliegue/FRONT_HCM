@@ -1,0 +1,46 @@
+<hr>
+<div [hidden]="empresa.idEmpresa!=null">
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div class="col-12 row" style="margin: 0;" *ngIf="empresa.idEmpresa">
+    <div class="form-group col-6 mb-3">
+        <button class="btn btn-sm btn-info" (click)="crearProyeccion()" style="width: auto; border-radius: 28px;">Nuevo Puesto</button>
+    </div>
+</div>
+<div [hidden]="empresa.idEmpresa==null" class="col-12">
+    <div [hidden]="lsProyeccion?.length > 0">
+        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            No hay ningun Puesto Area Empresa registrada
+        </div>
+    </div>
+    <div [hidden]="lsProyeccion?.length == 0" class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Nombre</th>
+                    <th class="text-center">Area</th>
+                    <th class="text-center">Categoria</th>
+                    <th class="text-center">Proyeccion Cargo</th>
+                    <th class="text-center">Actualizar</th>
+                    <th class="text-center">Eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let proy of lsProyeccion">
+                    <td>{{proy.puesto.snombre}}</td>
+                    <td>{{proy.puesto.areaDepartamentoEmpresa.snombre}}</td>
+                    <td>{{proy.puesto.scategoria}}</td>
+                    <td>{{proy.puestoProyeccion?proy.puestoProyeccion.snombre:'No asignado'}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" aria-hidden="true" (click)="modifificarProyeccion(proy)" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-delete" aria-hidden="true" (click)=eliminarProyeccion(proy) style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+<hr>
+<div [hidden]="empresa!=null" >
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div [hidden]="empresa==null" class="card-header" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+    <div class="col-12 row" style="margin: 0;">
+        <div class="col-8" style="margin-bottom: 10px">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="SearchOptions" id="numDoc" (click)="checkAction(); filterPost=''" checked>
+                <label class="form-check-label" for="numDoc" style="font-size: 12px">Buscar por Número Documento</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="SearchOptions" id="nomCmp" (click)="checkAction(); filterPost=''">
+                <label class="form-check-label" for="nomCmp" style="font-size: 12px">Buscar por Nombre</label>
+            </div>
+            <br>
+            <input class="form-control form-control-sm min" spellcheck="false" id="inputGeneral" type="text" [(ngModel)]="filterPost" placeholder="{{mostrarPH}}" style="width: 50%; border-radius: 28px">
+        </div>
+    </div>
+</div>
+<div [hidden]="empresa==null" class="col-12">
+    <div [hidden]="lsTrabajador?.length > 0" >
+        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            No hay registro de trabajadores
+        </div>
+    </div>
+    <div [hidden]="lsTrabajador?.length == 0" class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Nro. Documento</th>
+                    <th class="text-center">Apellidos y Nombre</th>
+                    <th class="text-center">Correo</th>
+                    <th class="text-center">Fecha Nac.</th>
+                    <th class="text-center">Sexo</th>
+                    <th class="text-center">Estado</th>
+                    <th class="text-center">Ver</th>
+                    <th class="text-center">Agregar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" style="font-size: 12px" *ngFor="let trab of lsTrabajador | filter :filterPost :filterBoolean">
+                    <td>{{trab.trabajador.nroDoc}}</td>
+                    <td>{{trab.trabajador.apePater}} {{trab.trabajador.apeMater}} {{trab.trabajador.nombres}}</td>
+                    <td>{{trab.trabajador.correo}}</td>
+                    <td>{{trab.trabajador.fecNac | date :'dd-MM-yyyy'}}</td>
+                    <td>{{trab.trabajador.sexo=="M"?'Masculino':'Femenino'}}</td>
+                    <td>{{trab.trabajador.situacion.descripcion}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-eye" (click)="verDerHab(trab.trabajador)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-plus-circle" (click)="regisDerHab(trab.trabajador)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

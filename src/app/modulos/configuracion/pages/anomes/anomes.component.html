@@ -1,0 +1,34 @@
+<hr>
+<div class="col-12 row" style="margin: 0;">
+    <div class="form-group col-6 mb-3">
+        <button class="btn btn-sm btn-info" (click)="nuevoAno()" style="width: 23%; border-radius: 28px;">Nuevo Año</button>
+    </div>
+</div>
+<div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Mes</th>
+                    <th class="text-center">Abreviatura</th>
+                    <th class="text-center">Cantidad de feriados</th>
+                    <th class="text-center">Dias Feriados</th>
+                    <th class="text-center">Actualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let mes of lsMeses">
+                    <td>{{mes.descripcion}}</td>
+                    <td class="text-center">{{mes.abrev}}</td>
+                    <td class="text-center">{{mes.diasFeriadoCalend}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-calendar-plus" (click)="seleccionarFeriados(mes)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" (click)="actualizarMes(mes)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

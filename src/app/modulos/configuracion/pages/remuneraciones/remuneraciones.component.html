@@ -1,0 +1,98 @@
+<hr>
+<div [hidden]="empresa!=null" >
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+<div class="col-12 row" style="margin: 0;" *ngIf="empresa">
+    <div class="form-group col-6 mb-3">
+        <button class="btn btn-sm btn-info" (click)="registrarRem()" style="width: auto; border-radius: 28px;">Nueva
+      Remuneracion</button>
+    </div>
+</div>
+<nav [hidden]="empresa==null" class="mt-lg-1 mb-1">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-activo" data-toggle="tab" href="#nav-act" role="tab" aria-controls="nav-activo" aria-selected="true">Activo</a>
+        <a class="nav-item nav-link" id="nav-inactivo" data-toggle="tab" href="#nav-inac" role="tab" aria-controls="nav-inactivo" aria-selected="false">Inactivo</a>
+    </div>
+</nav>
+<div [hidden]="empresa==null" class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-act" role="tabpanel" aria-labelledby="nav-act">
+        <div class="col-12">
+            <div [hidden]="lsRemuneracion?.length > 0" >
+                <br>
+                <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                    No hay ninguna remuneración registrada
+                </div>
+            </div>
+            <div [hidden]="lsRemuneracion?.length == 0" class="table-responsive">
+                <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                    <thead style="background: #ebeff5;">
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Tipo</th>
+                            <th class="text-center">Descripcion</th>
+                            <th class="text-center">Afecto Descuento</th>
+                            <th class="text-center">Actualizar</th>
+                            <th class="text-center">Dar Baja</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" style="font-size: 12px" *ngFor="let rem of lsRemuneracion">
+                            <td>{{rem.descripcion}}</td>
+                            <td>{{rem.tipoRemuneracion==1?'MONTO FIJO':'FORMULA'}}</td>
+                            <td *ngIf="rem.tipoRemuneracion==1">monto fijo</td>
+                            <td *ngIf="rem.tipoRemuneracion==2"> formualo</td>
+                            <td>{{rem.afectoDsct==0?'NO':'SI'}}</td>
+                            <td>
+                                <i class="mdi mdi-pencil" (click)="modificarRem(rem)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                            <td>
+                                <i class="mdi mdi-window-close" (click)="darBajaRem(rem)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="nav-inac" role="tabpanel" aria-labelledby="nav-inac">
+        <div class="col-12">
+            <div [hidden]="lsRemuneracionInac?.length > 0" >
+                <br>
+                <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                    No hay ninguna remuneración inactiva
+                </div>
+            </div>
+            <div [hidden]="lsRemuneracionInac?.length == 0" class="table-responsive">
+                <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                    <thead style="background: #ebeff5;">
+                        <tr>
+                            <th class="text-center">Nombre</th>
+                            <th class="text-center">Tipo</th>
+                            <th class="text-center">Descripcion</th>
+                            <th class="text-center">Afecto Descuento</th>
+                            <th class="text-center">Actualizar</th>
+                            <th class="text-center">Activar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="text-center" style="font-size: 12px" *ngFor="let remInac of lsRemuneracionInac">
+                            <td>{{remInac.descripcion}}</td>
+                            <td>{{remInac.tipoRemuneracion==1?'MONTO FIJO':'FORMULA'}}</td>
+                            <td *ngIf="remInac.tipoRemuneracion==1">monto fijo</td>
+                            <td *ngIf="remInac.tipoRemuneracion==2"> formualo</td>
+                            <td>{{remInac.afectoDsct==0?'NO':'SI'}}</td>
+                            <td>
+                                <i class="mdi mdi-pencil" (click)="modificarRem(remInac)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                            <td>
+                                <i class="mdi mdi-replay" (click)="activarRem(remInac)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
