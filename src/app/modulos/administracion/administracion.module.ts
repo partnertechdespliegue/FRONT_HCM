@@ -20,6 +20,9 @@ import { NuevoPasswordComponent } from './pages/usuarios/modals/nuevo-password/n
 import { NuevoPasswordConfirmarComponent } from './pages/usuarios/modals/nuevo-password-confirmar/nuevo-password-confirmar.component';
 import { TimePickerModule } from '@syncfusion/ej2-angular-calendars';
 import { GlobalInterceptor } from '../../global.interceptor';
+import { GestionPaginasComponent } from './pages/paginas/gestion-paginas.component';
+import { EditarGestionPaginasComponent } from './pages/paginas/modals/editar-gestion-paginas/editar-gestion-paginas.component';
+import { ConfirmarGestionPaginasComponent } from './pages/paginas/modals/confirmar-gestion-paginas/confirmar-gestion-paginas.component';
 
 
 @NgModule({
@@ -37,13 +40,18 @@ import { GlobalInterceptor } from '../../global.interceptor';
         NuevoUsuarioComponent,
         NuevoUsuarioConfirmarComponent,
         NuevoPasswordComponent,
-        NuevoPasswordConfirmarComponent
+        NuevoPasswordConfirmarComponent,
+        GestionPaginasComponent,
+        EditarGestionPaginasComponent,
+        ConfirmarGestionPaginasComponent
     ],
     entryComponents:[
         NuevoUsuarioComponent,
         NuevoUsuarioConfirmarComponent,
         NuevoPasswordComponent,
-        NuevoPasswordConfirmarComponent
+        NuevoPasswordConfirmarComponent,
+        EditarGestionPaginasComponent,
+        ConfirmarGestionPaginasComponent
     ],
     providers:[
         {

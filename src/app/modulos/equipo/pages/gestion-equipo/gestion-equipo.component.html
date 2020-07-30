@@ -1,0 +1,153 @@
+<hr>
+<div>
+    <div [hidden]="empresa!=null">
+        <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+            Seleccione una empresa
+        </div>
+    </div>
+
+    <div *ngIf="empresa" class="card-header" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+        <div class="col-12 row" style="margin: 0;">
+            <div class="col-6" style="margin-bottom: 10px">
+                <div class="col-12">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="SearchOptions" id="numDoc" (click)="checkAction(); filterPost=''" checked>
+                        <label class="form-check-label" for="numDoc" style="font-size: 12px">Buscar por Número Documento</label>
+                    </div>
+
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="SearchOptions" id="nomCmp" (click)="checkAction(); filterPost=''">
+                        <label class="form-check-label" for="nomCmp" style="font-size: 12px">Buscar por Nombre</label>
+                    </div>
+                </div>
+                <div class="col-10" style="margin-left: 2%;">
+                    <input class="form-control form-control-sm min" spellcheck="false" id="inputGeneral" type="text" [(ngModel)]="filterPost" (click)="filterPost=''" placeholder="{{mostrarPH}}" style="border-radius: 28px">
+                </div>
+            </div>
+            <div *ngIf="token.id_perfil > 2 && empresa" class="col-6" style="margin: auto;">
+                <div class="form-group col-8">
+                    <button class="btn btn-sm btn-info" (click)="registrarSolicitud()" id="solrec" style="width: auto; border-radius: 28px; padding: 4px 10px;">Solicitar recurso</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav [hidden]="empresa==null">
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-equipo-tab" data-toggle="tab" href="#nav-equipo" role="tab" aria-controls="nav-equipo" aria-selected="true">Equipo</a>
+            <a class="nav-item nav-link" id="nav-solicitud-tab" data-toggle="tab" href="#nav-solicitud" role="tab" aria-controls="nav-solicitud" aria-selected="false">solicitud</a>
+        </div>
+    </nav>
+    <div [hidden]="empresa==null" class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 30px; margin-bottom: 20px;">
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-equipo" role="tabpanel" aria-labelledby="nav-equipo-tab">
+                <p>Equipo</p>
+                <!-- <div class="col-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center" colspan="2">Descripcion</th>
+                                    <th class="text-center">solicitud haber provision</th>
+                                    <th class="text-center">solicitud debe provision</th>
+                                    <th class="text-center">solicitud haber pago</th>
+                                    <th class="text-center">solicitud debe pago</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody *ngFor="let equipo of lsequipo">
+                                <tr style="font-size: 12px">
+                                    <td class="text-center" style="padding: 10px  0px 0px 0px">
+                                        <a *ngIf="equipo.expanded" (click)="equipo.expanded = false;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-up-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                        <a *ngIf="!equipo.expanded" (click)="equipo.expanded = true;" class="efecctrotatecont">
+                                            <i class="mdi mdi-arrow-down-drop-circle efecctrotate" style="font-size: 23px; cursor: pointer;"></i>
+                                        </a>
+                                    </td>
+                                    <td class="text-center">{{equipo.sdescripcion}}</td>
+                                    <td class="text-center p-10">{{equipo.solicitudHaberProvision!=null?equipo.solicitudHaberProvision.icodigosolicitud:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{equipo.solicitudDebeProvision!=null?equipo.solicitudDebeProvision.icodigosolicitud:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{equipo.solicitudHaberPago!=null?equipo.solicitudHaberPago.icodigosolicitud:"No asignago"}}</td>
+                                    <td class="text-center p-10">{{equipo.solicitudDebePago!=null?equipo.solicitudDebePago.icodigosolicitud:"No asignago"}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" (click)="actualizarequipo(equipo)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete" (click)="eliminarequipo(equipo)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                                <tr *ngIf="equipo.expanded" style="font-size: 12px">
+                                    <td colspan="8">
+                                        <div class="form-row col-12" style="margin: 0 auto;">
+                                            <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                                                <thead style="background: #ebeff5;">
+                                                    <tr>
+                                                        <th class="text-center">Tipo</th>
+                                                        <th class="text-center">Codigo</th>
+                                                        <th class="text-center">Descripcion</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">solicitud haber provision</td>
+                                                        <td class="text-center">{{equipo.solicitudHaberProvision!=null?equipo.solicitudHaberProvision.icodigosolicitud:"No asignago"}}</td>
+                                                        <td class="text-center">{{equipo.solicitudHaberProvision!=null?equipo.solicitudHaberProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">solicitud debe provision</td>
+                                                        <td class="text-center">{{equipo.solicitudDebeProvision!=null?equipo.solicitudDebeProvision.icodigosolicitud:"No asignago"}}</td>
+                                                        <td class="text-center">{{equipo.solicitudDebeProvision!=null?equipo.solicitudDebeProvision.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">solicitud haber pago</td>
+                                                        <td class="text-center">{{equipo.solicitudHaberPago!=null?equipo.solicitudHaberPago.icodigosolicitud:"No asignago"}}</td>
+                                                        <td class="text-center">{{equipo.solicitudHaberPago!=null?equipo.solicitudHaberPago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                    <tr style="font-size: 12px">
+                                                        <td class="text-center">solicitud debe pago</td>
+                                                        <td class="text-center">{{equipo.solicitudDebePago!=null?equipo.solicitudDebePago.icodigosolicitud:"No asignago"}}</td>
+                                                        <td class="text-center">{{equipo.solicitudDebePago!=null?equipo.solicitudDebePago.sdescripcion:"No asignago"}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+            </div>
+            <div class="tab-pane fade" id="nav-solicitud" role="tabpanel" aria-labelledby="nav-solicitud-tab">
+                <p>Solicitud</p>
+                <!-- <div class="col-12 ">
+                    <div class="table-responsive ">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5; ">
+                                <tr>
+                                    <th class="text-center">Codigo</th>
+                                    <th class="text-center">Descripcion</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let solicitud of lssolicitud">
+                                    <td class="text-center">{{solicitud.icodigosolicitud}}</td>
+                                    <td class="text-center">{{solicitud.sdescripcion}}</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" (click)="actualizarsolicitud(solicitud)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-delete" (click)="eliminarsolicitud(solicitud)" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</div>

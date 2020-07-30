@@ -109,4 +109,17 @@ export class UsuarioService {
     return this.http.post(url, perfil)
   }
 
+  listarPerfil() {
+    return this.http.get(URL_SERVICIOSBACK + 'modulo/listarPerfiles');
+  }
+
+  listarPagina() {
+    return this.http.get(URL_SERVICIOSBACK + 'modulo/listarPaginas');
+  }
+
+  guardarGestion(moduloDTO) {
+    return this.http.post(URL_SERVICIOSBACK + 'modulo/gestionPagina', moduloDTO);
+  }
+
+
 }
