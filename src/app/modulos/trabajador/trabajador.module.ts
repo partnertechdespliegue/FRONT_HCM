@@ -56,6 +56,7 @@ import { UsuarioService } from '../administracion/services/usuarios/usuario.serv
 import { ConfirmarDerechoHabienteComponent } from './pages/derecho-habientes/modals/confirmar-derecho-habiente/confirmar-derecho-habiente.component';
 import { GestionHuellaDigitalComponent } from './pages/gestion-trabajador/modals/gestion-huella-digital/gestion-huella-digital.component';
 import { HuelleroService } from './services/huellero/huellero.service';
+import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modals/carga-masiva-asistencia/carga-masiva-asistencia.component';
 
 @NgModule({
   imports: [
@@ -99,7 +100,8 @@ import { HuelleroService } from './services/huellero/huellero.service';
     ConfirmarRemuDsctComponent,
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
-    GestionHuellaDigitalComponent
+    GestionHuellaDigitalComponent,
+    CargaMasivaAsistenciaComponent
   ],
   entryComponents: [
     NuevoGestionTrabajadorComponent,
@@ -119,7 +121,8 @@ import { HuelleroService } from './services/huellero/huellero.service';
     ConfirmarRemuDsctComponent,
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
-    GestionHuellaDigitalComponent
+    GestionHuellaDigitalComponent,
+    CargaMasivaAsistenciaComponent
   ],
   providers: [
       {
