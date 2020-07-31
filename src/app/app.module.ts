@@ -36,6 +36,7 @@ import { AdministracionComponent } from './modulos/administracion/administracion
 import { InicioComponent } from './shared/Inicio/inicio.component';
 import { UsuarioService } from './modulos/administracion/services/usuarios/usuario.service';
 import { ContabilidadComponent } from './modulos/contabilidad/contabilidad.component';
+import { EquipoComponent } from './modulos/equipo/equipo.component';
 
 registerLocaleData(localesPE,'es-Pe');
 
@@ -49,7 +50,8 @@ registerLocaleData(localesPE,'es-Pe');
     PlanillasComponent,
     ConfiguracionComponent,
     AdministracionComponent,
-    ContabilidadComponent
+    ContabilidadComponent,
+    EquipoComponent
   ],
   imports: [
     RouterModule,

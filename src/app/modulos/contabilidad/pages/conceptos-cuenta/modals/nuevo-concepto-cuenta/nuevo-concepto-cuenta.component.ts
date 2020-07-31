@@ -212,7 +212,7 @@ export class NuevoConceptoCuentaComponent implements OnInit, OnDestroy {
     var patron = /[0-9]/;
     var tecla_final = String.fromCharCode(this.tecla);
     if (!patron.test(tecla_final)) {
-      Swal.fire(Constantes.WARNING, 'Valor inválido, ingrese solo números del 0 al 9', 'warning');
+      Swal.fire({title:"Valor inválido, ingrese solo números del 0 al 9",timer:1500,showConfirmButton:false});
       return false;
     }
   }

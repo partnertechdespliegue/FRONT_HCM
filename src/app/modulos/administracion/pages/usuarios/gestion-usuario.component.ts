@@ -6,7 +6,6 @@ import { NuevoPasswordComponent } from './modals/nuevo-password/nuevo-password.c
 import Constantes from '../../../../models/Constantes';
 
 
-
 @Component({
   selector: 'app-gestion-usuario',
   templateUrl: './gestion-usuario.component.html',

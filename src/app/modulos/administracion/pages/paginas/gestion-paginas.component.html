@@ -1,0 +1,21 @@
+<hr>
+<div class="col-12">
+    <div class="table-responsive">
+        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+            <thead style="background: #ebeff5;">
+                <tr>
+                    <th class="text-center">Perfil</th>
+                    <th class="text-center">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-size: 12px" *ngFor="let perfil of lsPerfile">
+                    <td class="text-center">{{perfil.nombres}}</td>
+                    <td class="text-center">
+                        <i class="mdi mdi-pencil" (click)="gestionPaginas(perfil)" id="editar" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

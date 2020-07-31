@@ -58,6 +58,7 @@ import { GestionHuellaDigitalComponent } from './pages/gestion-trabajador/modals
 import { HuelleroService } from './services/huellero/huellero.service';
 import { SolicitudComponent } from './pages/solicitud/solicitud.component';
 import { SolicitudService } from './services/solicitud/solicitud.service';
+import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modals/carga-masiva-asistencia/carga-masiva-asistencia.component';
 
 @NgModule({
   imports: [
@@ -102,7 +103,8 @@ import { SolicitudService } from './services/solicitud/solicitud.service';
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
     GestionHuellaDigitalComponent,
-    SolicitudComponent
+    SolicitudComponent,
+    CargaMasivaAsistenciaComponent
   ],
   entryComponents: [
     NuevoGestionTrabajadorComponent,
@@ -122,7 +124,8 @@ import { SolicitudService } from './services/solicitud/solicitud.service';
     ConfirmarRemuDsctComponent,
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
-    GestionHuellaDigitalComponent
+    GestionHuellaDigitalComponent,
+    CargaMasivaAsistenciaComponent
   ],
   providers: [
       {

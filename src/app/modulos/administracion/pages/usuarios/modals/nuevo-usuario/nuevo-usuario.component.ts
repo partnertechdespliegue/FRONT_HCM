@@ -105,11 +105,11 @@ export class NuevoUsuarioComponent implements OnInit {
   }
 
   confirmarNuevoUsuario() {
+    this.asignandoObjetos();
     this.openModalConfirmar();
   }
 
-  public openModalConfirmar() {
-    this.asignandoObjetos();
+  public openModalConfirmar() { debugger
     const modalRef = this.modalService.open(NuevoUsuarioConfirmarComponent,
       {
         backdrop: 'static',

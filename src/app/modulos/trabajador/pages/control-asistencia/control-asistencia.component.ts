@@ -12,6 +12,7 @@ import { Año } from '../../../../models/Año';
 import { Mes } from '../../../../models/Mes';
 import { MostrarFaltasComponent } from './modals/mostrar-faltas/mostrar-faltas.component';
 import { MostrarPermisoComponent } from './modals/mostrar-permisos/mostrar-permisos.component';
+import { CargaMasivaAsistenciaComponent } from './modals/carga-masiva-asistencia/carga-masiva-asistencia.component';
 
 
 @Component({
@@ -61,8 +62,8 @@ export class ControlAsistenciaComponent implements OnInit, OnDestroy {
     this.checkAction();
   }
 
-  ngOnDestroy(){
-    if(this.modalRef!=null){
+  ngOnDestroy() {
+    if (this.modalRef != null) {
       this.modalRef.close();
     }
   }
@@ -158,10 +159,22 @@ export class ControlAsistenciaComponent implements OnInit, OnDestroy {
         keyboard: false,
         windowClass: 'modalLG'
       })
-      this.modalRef.componentInstance.input_trabajador = indice;
-      this.modalRef.componentInstance.input_ano = this.ano;
-      this.modalRef.componentInstance.input_mes = this.mes;
-      this.modalRef.result.then((result) => {
+    this.modalRef.componentInstance.input_trabajador = indice;
+    this.modalRef.componentInstance.input_ano = this.ano;
+    this.modalRef.componentInstance.input_mes = this.mes;
+    this.modalRef.result.then((result) => {
+    }, (reason) => {
+    });
+  }
+
+  openModalCargaMasiva() {
+    this.modalRef = this.modalService.open(CargaMasivaAsistenciaComponent,
+      {
+        backdrop: 'static',
+        keyboard: false,
+        windowClass: 'modalSM'
+      })
+    this.modalRef.result.then((result) => {
     }, (reason) => {
     });
   }
@@ -173,7 +186,7 @@ export class ControlAsistenciaComponent implements OnInit, OnDestroy {
         keyboard: false,
         windowClass: 'modalLG'
       })
-      this.modalRef.componentInstance.input_trabajador = indice;
+    this.modalRef.componentInstance.input_trabajador = indice;
     this.modalRef.componentInstance.input_ano = this.ano;
     this.modalRef.componentInstance.input_mes = this.mes;
     this.modalRef.result.then((result) => {

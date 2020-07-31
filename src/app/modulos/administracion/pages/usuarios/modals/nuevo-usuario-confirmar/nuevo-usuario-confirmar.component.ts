@@ -24,11 +24,11 @@ export class NuevoUsuarioConfirmarComponent implements OnInit {
     public router: Router
   ) { }
 
-  ngOnInit() {
+  ngOnInit() { debugger
     this.obj_usuario = this.input_usuario_final;
   }
 
-  crud() {
+  crud() { debugger
     switch (this.obj_usuario.usuario.accion) {
       case Constantes.ACTUALIZAR: this.actualizarUsuario();
         break;
@@ -69,12 +69,12 @@ export class NuevoUsuarioConfirmarComponent implements OnInit {
     this.activemodal.dismiss();
   }
 
-  actualizarUsuario() {
+  actualizarUsuario() { debugger
     this.obj_usuario.usuario.perfil.idPerfil = this.obj_usuario.perfil.idPerfil;
     this.usuarioService.subirFoto(this.input_foto, this.obj_usuario.usuario.idUsuario)
       .subscribe((result: any) => {
         if (result.estado == 1) {
-          this.usuarioService.actualizarUsuario(result.usuario).subscribe((resp: any) => {
+          this.usuarioService.actualizarUsuario(this.obj_usuario.usuario).subscribe((resp: any) => {
             if (resp.estado == 1) {
               Swal.fire(Constantes.SUCCESS, resp.msg, 'success');
               this.refrescar(this.router.url);
