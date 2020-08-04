@@ -14,6 +14,7 @@ const Constantes = {
   "ACTUALIZAR": "U",
   "ELIMINAR": "D",
   "REGISTRAR": "R",
+  "CANCELARSOLICITUD": "C",
   "MOSTRAR": "M",
   "REPORTEWORD": "W",
   "IDPASAPORTE": 3,
