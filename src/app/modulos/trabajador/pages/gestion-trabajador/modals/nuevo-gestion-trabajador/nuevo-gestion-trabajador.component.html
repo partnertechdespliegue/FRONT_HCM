@@ -83,8 +83,8 @@
                         </div>
                         <div class="form-row col-12">
                             <div class="col-4 mb-3">
-                                <label for="corr">Correo</label>
-                                <input class="form-control form-control-sm" type="email" placeholder="Correo" id="corr" [(ngModel)]="trabajador.correo" name="#trabajador.correo" maxlength="80" (blur)="verificarCorreo(trabajador.correo)">
+                                <label for="corr">Correo *</label>
+                                <input class="form-control form-control-sm" type="email" placeholder="Correo" id="corr" [(ngModel)]="trabajador.correo" name="#trabajador.correo" maxlength="80" (blur)="verificarCorreo(trabajador.correo)" required>
                             </div>
                             <div class="col-4 mb-3">
                                 <label for="cel">Celular</label>

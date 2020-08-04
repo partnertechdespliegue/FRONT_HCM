@@ -12,8 +12,9 @@
             </thead>
             <tbody>
                 <tr style="font-size: 12px" *ngFor="let pag of lsPaginas; let i = index">
-                    <td>
-                        <i class={{pag.icono}} id="editar" aria-hidden="true" style="cursor: pointer; font-size: 25px;"></i> {{pag.descripcion}}
+                    <td style="padding-left: 90px;">
+                        <i class={{pag.icono}} id="editar" aria-hidden="true" style="cursor: pointer; font-size: 25px; margin-right: 5px;"></i>
+                        <label class="form-control-label">{{pag.descripcion}}</label>
                     </td>
                     <td class="text-center">
                         <input class="form-check-input" type="checkbox" (click)="cambiarAsignado(i)" name="checkVisible" id="input{{i}}" required>
