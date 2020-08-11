@@ -19,7 +19,18 @@ export class SolicitudService {
   eliminarSolicitud(solicitud){
     const url = URL_SERVICIOSBACK + 'solicitud/' + solicitud.iidSolicitud;
     return this.http.delete(url,solicitud)
-
+  }
+  cambiarEstado(solicitudDto) {
+    return this.http.put(URL_SERVICIOSBACK + 'solicitud/cambiarEstado',solicitudDto)    
+  }
+  cambiarEstadoRevision(solicitudDto) {
+    return this.http.put(URL_SERVICIOSBACK + 'solicitud/cambiarEstadoRevision',solicitudDto)    
+  }
+  cambiarEstadoAprobado(solicitudDto) {
+    return this.http.put(URL_SERVICIOSBACK + 'solicitud/cambiarEstadoAprobar',solicitudDto)    
+  }
+  cambiarEstadoRechazado(solicitudDto) {
+    return this.http.put(URL_SERVICIOSBACK + 'solicitud/cambiarEstadoRechazar',solicitudDto)    
   }
   
 }

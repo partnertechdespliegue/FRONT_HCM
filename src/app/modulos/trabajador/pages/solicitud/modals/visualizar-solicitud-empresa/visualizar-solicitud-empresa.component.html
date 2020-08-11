@@ -41,8 +41,8 @@
     </div>
     <div class=" modal-footer ">
         <button (click)="close()" type="button" class="btn btn-danger btn-sm min" style="margin: 0px 5px;">Cerrar</button>
-        <button type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Rechazar</button>
-        <button type="button" class="btn btn-success btn-sm min" style="margin: 0px 5px;">Aprobar</button>
+        <button (click)="rechazarSolicitud(solicitud)" type="button" class="btn btn-info btn-sm min" style="margin: 0px 5px;">Rechazar</button>
+        <button (click)="aprobarSolicitud(solicitud)" type="button" class="btn btn-success btn-sm min" style="margin: 0px 5px;">Aprobar</button>
 
     </div>    
 </form>

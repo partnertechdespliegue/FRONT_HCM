@@ -52,15 +52,30 @@ export class SolicitudComponent implements OnInit {
 
    cancelarSolicitud(solicitud){
     var tmp_solicitud=Object.assign({},solicitud);
-    tmp_solicitud.accion=Constantes.CANCELARSOLICITUD
-    
+    tmp_solicitud.accion=Constantes.CANCELARSOLICITUD    
+    this.openModal(tmp_solicitud);
+  }
+
+  revisionSolicitud(solicitud){
+    var tmp_solicitud=Object.assign({},solicitud);
+    tmp_solicitud.accion=Constantes.SOLICITUDREVISION    
+    this.openModal(tmp_solicitud);
+  }
+
+  aprobarSolicitud(solicitud){
+    var tmp_solicitud=Object.assign({},solicitud);
+    tmp_solicitud.accion=Constantes.SOLICITUDAPROBADA    
+    this.openModal(tmp_solicitud);
+  }
+  rechazarSolicitud(solicitud){
+    var tmp_solicitud=Object.assign({},solicitud);
+    tmp_solicitud.accion=Constantes.SOLICITUDRECHAZADA    
     this.openModal(tmp_solicitud);
   }
 
   visualizarSolicitud(solicitud){
     var tmp_solicitud=Object.assign({},solicitud);
-    tmp_solicitud.accion="V"
-    
+    tmp_solicitud.accion="V"    
     this.openModal(tmp_solicitud);
   }
 
@@ -79,7 +94,7 @@ export class SolicitudComponent implements OnInit {
           keyboard: false,
           windowClass: 'modalMDD'
         })
-      this.modalRef.componentInstance.input_solicitudDto = indice;
+      this.modalRef.componentInstance.input_solicitud = indice;
       this.modalRef.result.then((result) => {
       }, (reason) => {
       });
@@ -101,7 +116,5 @@ export class SolicitudComponent implements OnInit {
 
     }
   } 
-
-
 
 }

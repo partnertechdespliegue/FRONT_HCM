@@ -117,8 +117,11 @@
                                     <th class="text-center">Fecha</th>
                                     <th class="text-center">Estado</th>
                                     <th class="text-center">Visualizar</th>
-                                    <th class="text-center">Actualizar</th>
+                                    <!-- <th class="text-center">Actualizar</th> -->
                                     <th class="text-center">Cancelar</th>
+                                    <th class="text-center">Revisión</th>
+                                    <th class="text-center">Aprobar</th>
+                                    <th class="text-center">Rechazar</th>
                                     
                                 </tr>
                             </thead>
@@ -126,17 +129,29 @@
                                 <tr style="font-size: 12px" *ngFor="let sol of lsSolicitudxEmpresa">
                                     <td>{{sol.puesto.snombre}}</td>
                                     <td>{{sol.trabajador.apePater}} {{sol.trabajador.apeMater}} {{sol.trabajador.nombres}}</td>
-                                    <td>{{sol.tfechaInicio | date:'dd/MM/yyyy'}}</td>                                    
-                                    <td *ngIf="sol.iestado==1">Solicitado</td>
-                                    <td *ngIf="sol.iestado==0">Cancelado</td>
+                                    <td>{{sol.tfechaInicio | date:'dd/MM/yyyy'}}</td>
+                                    <td *ngIf="sol.iestado==-1">Rechazado</td>
+                                    <td *ngIf="sol.iestado==0">Cancelado</td>                                  
+                                    <td *ngIf="sol.iestado==1">Solicitado</td>                                    
+                                    <td *ngIf="sol.iestado==2">En Revisión</td>
+                                    <td *ngIf="sol.iestado==3">Aprobadaaa</td>
                                     <td class="text-center">
                                         <i class="mdi mdi-eye" aria-hidden="true" (click)="visualizarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
                                     </td>
-                                    <td class="text-center">
+                                    <!-- <td class="text-center">
                                         <i class="mdi mdi-pencil" aria-hidden="true"  style="cursor: pointer; font-size: 25px;"></i>
-                                    </td>
+                                    </td> -->
                                     <td class="text-center">
                                         <i class=" mdi mdi-close-circle" aria-hidden="true" (click)="cancelarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class=" mdi mdi-content-paste" aria-hidden="true" (click)="revisionSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class=" mdi mdi-checkbox-marked-circle"  aria-hidden="true"  (click)="aprobarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class=" mdi mdi-block-helper" aria-hidden="true" (click)="rechazarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
                                     </td>
 
                                 </tr>

@@ -63,6 +63,8 @@ import { ConfirmarEliminarSolicitudComponent } from './pages/solicitud/modals/co
 import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/visualizar-solicitud-empresa/visualizar-solicitud-empresa.component';
 import { ReclutamientoComponent } from './pages/reclutamiento/reclutamiento.component';
 import { PostulanteService } from './services/postulante/postulante.service'
+import { IuReclutamientoComponent } from './pages/reclutamiento/modals/iu-reclutamiento/iu-reclutamiento.component';
+import { ConfirmarpostulanteComponent } from './pages/reclutamiento/modals/confirmarpostulante/confirmarpostulante.component';
 
 @NgModule({
   imports: [
@@ -111,7 +113,9 @@ import { PostulanteService } from './services/postulante/postulante.service'
     CargaMasivaAsistenciaComponent,
     ConfirmarEliminarSolicitudComponent,
     VisualizarSolicitudEmpresaComponent,
-    ReclutamientoComponent
+    ReclutamientoComponent,
+    IuReclutamientoComponent,
+    ConfirmarpostulanteComponent
   ],
   entryComponents: [
     NuevoGestionTrabajadorComponent,
@@ -135,7 +139,9 @@ import { PostulanteService } from './services/postulante/postulante.service'
     CargaMasivaAsistenciaComponent,
     ConfirmarEliminarSolicitudComponent,
     VisualizarSolicitudEmpresaComponent,
-    ReclutamientoComponent
+    ReclutamientoComponent,
+    IuReclutamientoComponent,
+    ConfirmarpostulanteComponent
   ],
   providers: [
       {
