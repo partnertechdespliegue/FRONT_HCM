@@ -1,0 +1,150 @@
+<hr>
+<div [hidden]="empresa!=null">
+    <div style="text-align: center; font-size: 22px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+        Seleccione una empresa
+    </div>
+</div>
+
+<div [hidden]="empresa==null"  class="card-header" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 10px; margin-bottom: 20px;">
+    <div class="col-12 row" style="margin: 0;">
+        <div class="col-6" style="margin-bottom: 10px">
+            <div class="col-12">
+                <div class="form-check form-check-inline">
+                    <label class="label"  style="font-size: 12px; color: #144e74;">Buscar Solicitud</label>
+                </div>               
+            </div>
+            <div class="col-10" style="margin-left: 2%;">
+                <input class="form-control form-control-sm min" style="border-radius: 28px">
+            </div>
+        </div>
+        <div class="col-6" style="margin: auto;">
+            <div class="form-group col-8">
+                <button class="btn btn-sm btn-info"  style="width: auto; border-radius: 28px; padding: 4px 10px;">Solicitar Recurso</button>
+            </div>
+        </div>
+    </div>
+</div>
+<nav [hidden]="trabajador==null || infoToken.id_perfil!=4 ">
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link" id="nav-planilla-tab" data-toggle="tab" href="#nav-equipo" role="tab" aria-controls="nav-planilla" aria-selected="false">Equipo</a>
+        <a class="nav-item nav-link active" id="nav-honorario-tab" data-toggle="tab" href="#nav-solicitudes" role="tab" aria-controls="nav-honorario" aria-selected="true">Solicitudes</a>
+    </div>
+</nav>
+<nav visible=" infoToken.id_perfil==1 || infoToken.id_perfil==5 " [hidden]="empresa==null || infoToken.id_perfil==4" >
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link" id="nav-planilla-tab" data-toggle="tab" href="#nav-equipo2" role="tab" aria-controls="nav-planilla" aria-selected="false">Equipo</a>
+        <a class="nav-item nav-link active" id="nav-honorario-tab" data-toggle="tab" href="#nav-solicitudes-empresa" role="tab" aria-controls="nav-honorario" aria-selected="true">Solicitudes</a>
+    </div>
+</nav>
+
+
+<div [hidden]="trabajador==null || infoToken.id_perfil!=4" class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 30px; margin-bottom: 20px;" >
+    <!-- <div class="table-responsive"> -->
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade " id="nav-equipo" role="tabpanel" aria-labelledby="nav-planilla-tab">
+                <div class="col-12">                    
+                    
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="nav-solicitudes" role="tabpanel" aria-labelledby="nav-honorario-tab">
+                <div class="col-12">
+                    <div [hidden]="lsSolicitudxSupervisor?.length > 0">
+                        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                            No hay ninguna Solicitud registrada por el Supervisor <!-- en la Empresa -->
+                        </div>
+                    </div>
+                    <div [hidden]="lsSolicitudxSupervisor?.length == 0" class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center">Puesto</th>
+                                    <th class="text-center">Solicitante</th>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Visualizar</th>                                
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Cancelar</th>                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let sol of lsSolicitudxSupervisor">
+                                    <td>{{sol.puesto.snombre}}</td>
+                                    <td>{{sol.trabajador.apePater}} {{sol.trabajador.apeMater}} {{sol.trabajador.nombres}}</td>
+                                    <td>{{sol.tfechaInicio | date:'dd/MM/yyyy'}}</td>                                    
+                                    <td *ngIf="sol.iestado==1">Solicitado</td>
+                                    <td *ngIf="sol.iestado==0">Cancelado</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-eye" aria-hidden="true" (click)="visualizarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"  style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class=" mdi mdi-close-circle" aria-hidden="true" (click)="cancelarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    <!-- </div>  -->   
+</div>
+
+<div visible=" infoToken.id_perfil==1 || infoToken.id_perfil==5 " [hidden]="empresa==null || infoToken.id_perfil==4 " class="card-body" style="border:1px solid #d6d6d6; border-radius: 10px; padding: 30px; margin-bottom: 20px;" >
+    <!-- <div class="table-responsive"> -->
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade " id="nav-equipo2" role="tabpanel" aria-labelledby="nav-planilla-tab">
+                <div class="col-12">                    
+                    
+                </div>
+            </div>
+            <div class="tab-pane fade show active" id="nav-solicitudes-empresa" role="tabpanel" aria-labelledby="nav-honorario-tab">
+                <div class="col-12">
+                    <div [hidden]="lsSolicitudxEmpresa?.length > 0">
+                        <div style="text-align: center; font-size: 20px; margin: 0px 20px ;padding:15px 0px; border-radius: 20px ;border-style: dotted; color: gray;">
+                            No hay ninguna Solicitud registrada por la Empresa <!-- en la Empresa -->
+                        </div>
+                    </div>
+                    <div [hidden]="lsSolicitudxEmpresa?.length == 0" class="table-responsive">
+                        <table class="table table-bordered" style="border: 1px solid #dbdde0;">
+                            <thead style="background: #ebeff5;">
+                                <tr>
+                                    <th class="text-center">Puesto</th>
+                                    <th class="text-center">Solicitante</th>
+                                    <th class="text-center">Fecha</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Visualizar</th>
+                                    <th class="text-center">Actualizar</th>
+                                    <th class="text-center">Cancelar</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="font-size: 12px" *ngFor="let sol of lsSolicitudxEmpresa">
+                                    <td>{{sol.puesto.snombre}}</td>
+                                    <td>{{sol.trabajador.apePater}} {{sol.trabajador.apeMater}} {{sol.trabajador.nombres}}</td>
+                                    <td>{{sol.tfechaInicio | date:'dd/MM/yyyy'}}</td>                                    
+                                    <td *ngIf="sol.iestado==1">Solicitado</td>
+                                    <td *ngIf="sol.iestado==0">Cancelado</td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-eye" aria-hidden="true" (click)="visualizarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class="mdi mdi-pencil" aria-hidden="true"  style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+                                    <td class="text-center">
+                                        <i class=" mdi mdi-close-circle" aria-hidden="true" (click)="cancelarSolicitud(sol)" style="cursor: pointer; font-size: 25px;"></i>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    <!-- </div>  -->   
+</div>

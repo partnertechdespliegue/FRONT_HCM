@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   login() {
     this._usuarioService.login(this.usuario).subscribe(
       (data: any) => {
-        if (data.id_perfil == 1 || data.id_perfil == 2 || data.id_perfil == 4) {
+        if (data.id_perfil == 1 || data.id_perfil == 2 || data.id_perfil == 4 || data.id_perfil == 5) {
           localStorage.setItem("InfoToken", JSON.stringify(data));
           this.router.navigate(["/inicio"]);
           this.tipoPerfil(data);

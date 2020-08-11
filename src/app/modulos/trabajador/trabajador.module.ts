@@ -56,7 +56,11 @@ import { UsuarioService } from '../administracion/services/usuarios/usuario.serv
 import { ConfirmarDerechoHabienteComponent } from './pages/derecho-habientes/modals/confirmar-derecho-habiente/confirmar-derecho-habiente.component';
 import { GestionHuellaDigitalComponent } from './pages/gestion-trabajador/modals/gestion-huella-digital/gestion-huella-digital.component';
 import { HuelleroService } from './services/huellero/huellero.service';
+import { SolicitudComponent } from './pages/solicitud/solicitud.component';
+import { SolicitudService } from './services/solicitud/solicitud.service';
 import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modals/carga-masiva-asistencia/carga-masiva-asistencia.component';
+import { ConfirmarEliminarSolicitudComponent } from './pages/solicitud/modals/confirmar-eliminar-solicitud/confirmar-eliminar-solicitud.component';
+import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/visualizar-solicitud-empresa/visualizar-solicitud-empresa.component';
 
 @NgModule({
   imports: [
@@ -101,7 +105,10 @@ import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modal
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
     GestionHuellaDigitalComponent,
-    CargaMasivaAsistenciaComponent
+    SolicitudComponent,
+    CargaMasivaAsistenciaComponent,
+    ConfirmarEliminarSolicitudComponent,
+    VisualizarSolicitudEmpresaComponent
   ],
   entryComponents: [
     NuevoGestionTrabajadorComponent,
@@ -122,7 +129,9 @@ import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modal
     ConfirmarEliminarComponent,
     ConfirmarDerechoHabienteComponent,
     GestionHuellaDigitalComponent,
-    CargaMasivaAsistenciaComponent
+    CargaMasivaAsistenciaComponent,
+    ConfirmarEliminarSolicitudComponent,
+    VisualizarSolicitudEmpresaComponent
   ],
   providers: [
       {
@@ -139,7 +148,8 @@ import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modal
       PermisoService,
       TiposPermisoService,
       HorarioService,
-      HuelleroService
+      HuelleroService,
+      SolicitudService
     ],
 })
 export class TrabajadorModule { }
