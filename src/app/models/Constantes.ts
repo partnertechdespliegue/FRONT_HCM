@@ -15,6 +15,10 @@ const Constantes = {
   "ELIMINAR": "D",
   "REGISTRAR": "R",
   "CANCELARSOLICITUD": "C",
+  "solicitudRevision": 2,
+  "SOLICITUDREVISION": "R",
+  "SOLICITUDAPROBADA": "SA",
+  "SOLICITUDRECHAZADA": "SR",
   "MOSTRAR": "M",
   "REPORTEWORD": "W",
   "IDPASAPORTE": 3,
@@ -265,18 +269,22 @@ const Constantes = {
 
   "unidadDeTiempo":[
     {
-      "id": 4,
-      "descripcion": "4ta"
+      "val": "A",
+      "descripcion": "Años"
     },
     {
-      "id": 5,
-      "descripcion": "5ta"
-    },
-    {
-      "id": 6,
-      "descripcion": "6ta"
+      "val": "M",
+      "descripcion": "Meses"
     }
   ],
+
+  /* "SOLICITUDREVISION": [
+    {
+      "iestado":2,
+      "abrev":"R"
+    }
+
+  ], */
 
 }
 export default Constantes;

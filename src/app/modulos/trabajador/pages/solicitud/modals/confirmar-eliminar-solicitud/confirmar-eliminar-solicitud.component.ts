@@ -22,6 +22,7 @@ export class ConfirmarEliminarSolicitudComponent implements OnInit {
   ) { }
 
   solicitudDto: any;
+  //solicitudRevision: number = Constantes.solicitudRevision;
 
   public solicitud:any = new Solicitud(); 
 
@@ -39,11 +40,52 @@ export class ConfirmarEliminarSolicitudComponent implements OnInit {
       
       case Constantes.CANCELARSOLICITUD : this.cancelarSolicitud();
       break;
-      
+      case Constantes.SOLICITUDREVISION: this.revisionSolicitud();
+      break;
+      case Constantes.SOLICITUDAPROBADA: this.aprobarSolicitud();
+      break;
+      case Constantes.SOLICITUDRECHAZADA: this.rechazarSolicitud();
+      break;
     }
   }
   cancelarSolicitud() {
     this.solicitudService.cancelarSolicitud(this.solicitud).subscribe((resp:any) =>{
+      if(resp.estado==1){
+        Swal.fire(Constantes.SUCCESS,resp.msg , 'success');
+        this.refrescar(this.router.url);
+      }else{
+        Swal.fire(Constantes.ERROR,resp.msg , 'error');
+      }
+      this.activemodal.dismiss();
+    })
+  }
+
+  revisionSolicitud() {
+    this.solicitudService.cambiarEstadoRevision(this.solicitud).subscribe((resp:any) =>{
+      if(resp.estado==1){
+        Swal.fire(Constantes.SUCCESS,resp.msg , 'success');
+        this.refrescar(this.router.url);
+      }else{
+        Swal.fire(Constantes.ERROR,resp.msg , 'error');
+      }
+      this.activemodal.dismiss();
+    })
+  }
+
+  aprobarSolicitud() {
+    this.solicitudService.cambiarEstadoAprobado(this.solicitud).subscribe((resp:any) =>{
+      if(resp.estado==1){
+        Swal.fire(Constantes.SUCCESS,resp.msg , 'success');
+        this.refrescar(this.router.url);
+      }else{
+        Swal.fire(Constantes.ERROR,resp.msg , 'error');
+      }
+      this.activemodal.dismiss();
+    })
+  }
+
+  rechazarSolicitud() {
+    this.solicitudService.cambiarEstadoRechazado(this.solicitud).subscribe((resp:any) =>{
       if(resp.estado==1){
         Swal.fire(Constantes.SUCCESS,resp.msg , 'success');
         this.refrescar(this.router.url);
