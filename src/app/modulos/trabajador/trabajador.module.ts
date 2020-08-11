@@ -61,6 +61,8 @@ import { SolicitudService } from './services/solicitud/solicitud.service';
 import { CargaMasivaAsistenciaComponent } from './pages/control-asistencia/modals/carga-masiva-asistencia/carga-masiva-asistencia.component';
 import { ConfirmarEliminarSolicitudComponent } from './pages/solicitud/modals/confirmar-eliminar-solicitud/confirmar-eliminar-solicitud.component';
 import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/visualizar-solicitud-empresa/visualizar-solicitud-empresa.component';
+import { ReclutamientoComponent } from './pages/reclutamiento/reclutamiento.component';
+import { PostulanteService } from './services/postulante/postulante.service'
 
 @NgModule({
   imports: [
@@ -108,7 +110,8 @@ import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/vi
     SolicitudComponent,
     CargaMasivaAsistenciaComponent,
     ConfirmarEliminarSolicitudComponent,
-    VisualizarSolicitudEmpresaComponent
+    VisualizarSolicitudEmpresaComponent,
+    ReclutamientoComponent
   ],
   entryComponents: [
     NuevoGestionTrabajadorComponent,
@@ -131,7 +134,8 @@ import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/vi
     GestionHuellaDigitalComponent,
     CargaMasivaAsistenciaComponent,
     ConfirmarEliminarSolicitudComponent,
-    VisualizarSolicitudEmpresaComponent
+    VisualizarSolicitudEmpresaComponent,
+    ReclutamientoComponent
   ],
   providers: [
       {
@@ -149,7 +153,8 @@ import { VisualizarSolicitudEmpresaComponent } from './pages/solicitud/modals/vi
       TiposPermisoService,
       HorarioService,
       HuelleroService,
-      SolicitudService
+      SolicitudService,
+      PostulanteService
     ],
 })
 export class TrabajadorModule { }

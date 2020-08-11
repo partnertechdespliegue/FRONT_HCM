@@ -261,7 +261,22 @@ const Constantes = {
         "icodigoCuenta":125
       }
     }
-  ]
+  ],
+
+  "unidadDeTiempo":[
+    {
+      "id": 4,
+      "descripcion": "4ta"
+    },
+    {
+      "id": 5,
+      "descripcion": "5ta"
+    },
+    {
+      "id": 6,
+      "descripcion": "6ta"
+    }
+  ],
 
 }
 export default Constantes;
